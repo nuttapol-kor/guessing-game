@@ -1,6 +1,8 @@
 # Guessing-game
 The alphabet guessing game web-application. Implement with Flask(Python) and Pymongo(MongoDB)
 
+Nuttapol Korcharoenrat 6210546404
+
 ## Installation
 
 Use the git the clone the project
