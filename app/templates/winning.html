@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block body %}
+    <h1 class="display-6">You are Winning!!</h1>
+    <p>Answer: {{ user_ans }}</p>
+    <p>How many times did you guess wrong?: {{ count }}</p>
+    <a href="/restart" class="btn btn-outline-warning">restart</a>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body %}
+    <form action="/update_gameplay" method="POST">
+        <h1 class="display-6">Please Choose A or B or C or D to guess the <strong>{{ step1 }}</strong> character</h1>
+        <br>
+        <p>Question: {{ hinting }}<br /><br /></p>
+        <input type="submit" name="answering" value="A" class="btn btn-outline-secondary">
+        <input type="submit" name="answering" value="B" class="btn btn-outline-secondary">
+        <input type="submit" name="answering" value="C" class="btn btn-outline-secondary">
+        <input type="submit" name="answering" value="D" class="btn btn-outline-secondary">
+    </form>
+
+    <p>Count: {{ count }}</p>
+    <p>Guessing: {{ user_ans }}</p>
+{% endblock %}
