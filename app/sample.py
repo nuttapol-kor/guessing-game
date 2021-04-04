@@ -19,9 +19,9 @@ def index():
 @application.route('/setup')
 def setup():
     dict_step = {1:'first', 2:'second', 3:'third', 4:'fourth'}
-    if db.test.count_documents({}) > 1:
+    if db.game.count_documents({}) > 1:
         return redirect(url_for('restart'))
-    doc1 = db.test.find_one({"stage": 1})
+    doc1 = db.game.find_one({"stage": 1})
     step1 = None
     right_answer = None
     if doc1 is not None:
@@ -33,7 +33,7 @@ def setup():
 def update_setup():
     user_choice = request.form.get('questioning')
     updated_content = {"$set": {'rightAns.$': user_choice},"$inc": {'step': 1}}
-    db.test.update_one({'stage': 1, 'rightAns': '_'}, updated_content)
+    db.game.update_one({'stage': 1, 'rightAns': '_'}, updated_content)
     return redirect(url_for('setup'))
 
 @application.route('/insert_setup', methods=['GET','POST'])
@@ -46,13 +46,13 @@ def insert_setup():
             'isWinning': False,
             'step': 1
         }
-    db.test.insert_one(insert_content)
+    db.game.insert_one(insert_content)
     return redirect(url_for('setup'))
 
 @application.route('/gameplay')
 def gameplay():
     dict_step = {5:'first', 6:'second', 7:'third', 8:'fourth'}
-    doc1 = db.test.find_one({"stage": 1})
+    doc1 = db.game.find_one({"stage": 1})
     right_answer = doc1['rightAns']
     hinting = '* '*len(right_answer)
     step1 = doc1['step']
@@ -65,7 +65,7 @@ def gameplay():
 
 @application.route('/update_gameplay', methods=['GET','POST'])
 def update_gameplay():
-    doc1 = db.test.find_one({"stage": 1})
+    doc1 = db.game.find_one({"stage": 1})
     right_answer = doc1['rightAns']
     if len(right_answer) > 0:
             first_element = right_answer[0]
@@ -80,14 +80,14 @@ def update_gameplay():
                 updated_content = {
                     "$inc": {'count': 1}
                 }
-            db.test.update_one({'stage': 1}, updated_content)
+            db.game.update_one({'stage': 1}, updated_content)
     return redirect(url_for('gameplay'))
 
 @application.route('/restart', methods=['GET','DELETE'])
 def restart():
-    doc1 = db.test.find_one({"stage": 1})
+    doc1 = db.game.find_one({"stage": 1})
     if doc1 is not None:
-        x = db.test.delete_many(doc1)
+        x = db.game.delete_many(doc1)
     return redirect(url_for('index'))
     
 
