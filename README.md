@@ -22,14 +22,14 @@ cd C:\Users\foo\Desktop\workspace\guessing-game
 
 ## Usage
 
-Starting the web page
+Building the container for this project and run the guessing game
 ```bash
 docker-compose up -d
 docker-compose logs -f --tail 10 web
 ```
 Start the game with localhost => http://localhost/
 
-Close the web page
+Close the container for this project
 ```bash
 docker-compose down -v
 ```
